@@ -1,12 +1,14 @@
-import React from "react";
 import "./App.css";
 import twitterLogo from "./assets/twitter-logo.svg";
+import { useWeb3 } from "./hooks/useWeb3";
 
 // Constants
 const TWITTER_HANDLE = "_buildspace";
 const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
 
 const App = () => {
+  useWeb3();
+
   return (
     <div className="App">
       <div className="container">
