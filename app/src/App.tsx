@@ -7,7 +7,13 @@ const TWITTER_HANDLE = "_buildspace";
 const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
 
 const App = () => {
-  useWeb3();
+  const { walletAddress, connect } = useWeb3();
+
+  const renderNotConnectedContainer = () => (
+    <button className="cta-button connect-wallet-button" onClick={connect}>
+      Connect to Wallet
+    </button>
+  );
 
   return (
     <div className="App">
@@ -15,6 +21,7 @@ const App = () => {
         <div className="header-container">
           <p className="header">🍭 Candy Drop</p>
           <p className="sub-text">NFT drop machine with fair mint</p>
+          {!walletAddress && renderNotConnectedContainer()}
         </div>
         <div className="footer-container">
           <img alt="Twitter Logo" className="twitter-logo" src={twitterLogo} />
