@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Buffer } from "buffer";
 import { ConfirmOptions, Connection, PublicKey } from "@solana/web3.js";
 import { Program, Provider, web3 } from "@project-serum/anchor";
 import { MintLayout, TOKEN_PROGRAM_ID, Token } from "@solana/spl-token";
@@ -391,19 +392,18 @@ const CandyMachine = ({ walletAddress }: { walletAddress: any }) => {
   };
 
   return (
-    <div className="machine-container">
-      {candyMachine ? (
-        <>
-          <p>{`Drop Date: ${candyMachine.state.goLiveDateTimeString}`}</p>
-          <p>{`Items Minted: ${candyMachine.state.itemsRedeemed} / ${candyMachine.state.itemsAvailable}`}</p>
-          <button className="cta-button mint-button" onClick={mintToken}>
-            Mint NFT
-          </button>
-        </>
-      ) : (
-        <></>
-      )}
-    </div>
+    candyMachine && (
+      <div className="machine-container">
+        <p>{`Drop Date: ${candyMachine.state.goLiveDateTimeString}`}</p>
+        <p>{`Items Minted: ${candyMachine.state.itemsRedeemed} / ${candyMachine.state.itemsAvailable}`}</p>
+        <button
+          className="cta-button mint-button"
+          onClick={() => mintToken(candyMachine)}
+        >
+          Mint NFT
+        </button>
+      </div>
+    )
   );
 };
 
